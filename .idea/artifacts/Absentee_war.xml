@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Absentee:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/Absentee_war</output-path>
+    <root id="archive" name="Absentee_war.war">
+      <element id="artifact" artifact-name="Absentee:war exploded" />
+    </root>
+  </artifact>
+</component>

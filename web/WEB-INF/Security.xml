@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+    <http auto-config="true" create-session="always" use-expressions="true">
+        <csrf disabled="true"/>
+        <intercept-url pattern="/login" access="permitAll"/>
+
+
+        <intercept-url pattern="/register" access="hasRole('ROLE_REGISTER')"/>
+
+        <intercept-url pattern="/stats" access="hasRole('ROLE_MANAGER')"/>
+        <intercept-url pattern="/updatelist" access="hasAnyRole('ROLE_MANAGER','ROLE_HR','ROLE_LINDA')"/>
+        <intercept-url pattern="/approvals" access="hasRole('ROLE_HR')"/>
+
+        <intercept-url pattern="/factoryoverview" access="hasAnyRole('ROLE_LINDA','ROLE_MANAGER')"></intercept-url>
+
+
+        <form-login login-page="/login" authentication-failure-url="/login?error" authentication-success-handler-ref="successHandler"/>
+        <logout logout-url="/logout" logout-success-url="/login?logout"/>
+
+    </http>
+
+    <beans:bean id="successHandler" class="Security.successHandler"> </beans:bean>
+
+    <authentication-manager alias="authenticationManager">
+
+        <authentication-provider user-service-ref="mongoUserDetailsService">
+            <password-encoder ref="bcrypt"/>
+        </authentication-provider>
+    </authentication-manager>
+    <beans:bean id="bcrypt" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <beans:bean id="mongoUserDetailsService" class="Security.MongoUserDetailService"/>
+
+</beans:beans>
