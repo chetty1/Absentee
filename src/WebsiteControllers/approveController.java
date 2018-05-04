@@ -68,22 +68,22 @@ public class approveController {
         switch (type) {
             case "Unpaid Leave":
                 view.setUnpaidLeave(leaveDays);
-                Staff staff = view.getStaff();
-                // staff.setLeaveBalance(staff.getLeaveBalance()-Integer.parseInt(leaveDays));
+                /*Staff staff = view.getStaff();
+                 staff.setLeaveBalance(staff.getLeaveBalance()-Double.parseDouble(leaveDays));
                 repo.save(staff);
-                view.setStaff(staff);
+                view.setStaff(staff);*/
                 break;
             case "Sick Leave":
                 view.setSickLeave(leaveDays);
                 Staff staff6 = view.getStaff();
-                //staff6.setSickLeaveBalance(staff6.getSickLeaveBalance()-Integer.parseInt(leaveDays));
+                staff6.setSickLeaveBalance(staff6.getSickLeaveBalance()-Integer.parseInt(leaveDays));
                 repo.save(staff6);
                 view.setStaff(staff6);
                 break;
             case "Family Responsibility Leave":
                 view.setFamRespon(leaveDays);
                 Staff staff1 = view.getStaff();
-                // staff1.setLeaveBalance(staff1.getLeaveBalance()-Integer.parseInt(leaveDays));
+                 staff1.setFamRespon(staff1.getFamRespon()-Integer.parseInt(leaveDays));
                 repo.save(staff1);
                 view.setStaff(staff1);
                 break;
@@ -104,16 +104,16 @@ public class approveController {
             case "Annual Leave":
                 view.setAnnualLeave(leaveDays);
                 Staff staff4 = view.getStaff();
-                // staff4.setLeaveBalance(staff4.getLeaveBalance()-Integer.parseInt(leaveDays));
+                 staff4.setLeaveBalance(staff4.getLeaveBalance()-Double.parseDouble(leaveDays));
                 repo.save(staff4);
                 view.setStaff(staff4);
                 break;
             case "Overtime Leave":
                 view.setOtLeave(leaveDays);
-                Staff staff5 = view.getStaff();
-                //  staff5.setLeaveBalance(staff5.getLeaveBalance()-Integer.parseInt(leaveDays));
+                /*Staff staff5 = view.getStaff();
+                  staff5.setLeaveBalance(staff5.getLeaveBalance()-Double.parseDouble(leaveDays));
                 repo.save(staff5);
-                view.setStaff(staff5);
+                view.setStaff(staff5);*/
                 break;
 
         }

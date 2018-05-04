@@ -109,7 +109,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
-
+                <li>
+                    <a style="color: white" href="/register">Register</a>
+                </li>
                 <li>
                     <a style="color: white" href="/editlist">Edit List</a>
                 </li>
@@ -131,14 +133,14 @@
     <div class="row">
 
         <section>
-            <h1 class="entry-title"><span>Clock In</span></h1>
+            <h1 class="entry-title"><span>Edit Clock In</span></h1>
             <hr>
             <form class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="control-label col-sm-3">Name</label>
                     <div class="col-md-8 col-sm-9">
                         <div class="input-group">
-                            <input style="width: 250px" class="form-control" name="emailid" value="" id="name">
+                            <input style="width: 250px" class="form-control" name="emailid" value="${name}" id="name">
                         </div>
                     </div>
                 </div>
@@ -185,7 +187,7 @@
                     <label class="control-label col-sm-3">Date</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-daterange">
-                            <input type="text" id="date" name="beforeTime" class="form-control ">
+                            <input type="text" id="date" name="beforeTime" value="${date}" class="form-control ">
 
                         </div>
                     </div>
@@ -196,14 +198,14 @@
                     <label class="control-label col-sm-3">Overtime Type</label>
                     <div class="col-md-8 col-sm-8">
                         <div class="input-group" style="padding-top: 8px">
-                            <label id="radio2" class="form-check-label">
+                            <label  id="radio2" class="form-check-label">
                                 <input type="radio" class="form-check-input"  name="radio"
                                        id="Time and a Half" value="option1">
                                 Time and a Half
                             </label>
 
-                            <label id="radio1"  class="form-check-label">
-                                <input type="radio" class="form-check-input"  name="radio"
+                            <label id= "radio1" class="form-check-label">
+                                <input type="radio" class="form-check-input" name="radio"
                                        id="Double Pay" value="option1">
                                 Double Pay
                             </label>
@@ -218,8 +220,8 @@
                     <div class="col-md-8 col-sm-8">
                         <div class="input-group" style="padding-top: 8px">
                             <label class="form-check-label">
-                                <input type="checkbox" class="checkbox-inline" name="absent"
-                                       id="Absent" value="option1">
+                                <input ${checked} type="checkbox"  class="checkbox-inline" name="absent"
+                                       id="Absent"  value="">
 
                             </label>
 
@@ -232,6 +234,8 @@
                 <div class="form-group">
                     <div class="col-xs-offset-3 col-xs-10">
                         <input type="button" value="Save" onclick="onSave()" class="btn btn-primary">
+                       <a href="/editlist"> <input type="button" value="Back"  class="btn btn-primary"></a>
+
                     </div>
                 </div>
 
@@ -251,30 +255,7 @@
 <script src="<spring:url value="/assets/jquery.timepicker.js"/>"></script>
 <script src="<spring:url value="/assets/jquery.autocomplete.min.js"/>"></script>
 
-<script>
-    $(document).ready(function () {
 
-        $('#name').autocomplete({
-            serviceUrl: '/getName',
-            paramName: "Name",
-            delimiter: ",",
-            transformResult: function (response) {
-
-                return {
-                    //must convert json to javascript object before process
-                    suggestions: $.map(JSON.parse(response), function (item) {
-                        return {value: item.name, data: item.id};
-                    })
-
-                };
-
-            }
-
-
-        });
-
-    });
-</script>
 
 <script type="text/javascript">
     $('.input-daterange input').each(function () {
@@ -298,7 +279,7 @@
 
         $.ajax({
             type: "post",
-            url: "/reguser",
+            url: "/edituser",
             datatype: 'json',
             data: {
                 name: document.getElementById("name").value,
@@ -311,6 +292,7 @@
                 date: document.getElementById("date").value,
                 overtimeType: document.getElementById("overtimeType").value,
                 absent: document.getElementById("Absent").checked
+
             },
 
             success: function (response) {
@@ -327,8 +309,8 @@
                         document.getElementById("Time and a Half").checked = false,
                         document.getElementById("date").value = "",
 
-                        document.getElementById("Double Pay").checked = false;
-
+                        document.getElementById("Double Pay").checked = false,
+window.location="/editlist";
 
             },
             error: function (jqXHR, exception) {
@@ -348,6 +330,7 @@
             radio.prop('checked', false);
             document.getElementById("overtimeType").value = "";
 
+
         } else {
             radio.prop('checked', true);
             document.getElementById("overtimeType").value = "Double Pay";
@@ -365,15 +348,23 @@
             radio.prop('checked', false);
             document.getElementById("overtimeType").value = "";
 
-
         } else {
             radio.prop('checked', true);
-
             document.getElementById("overtimeType").value = "Time and a Half";
 
         }
 
     });
+</script>
+
+
+
+
+<script>
+    function yolo(id) {
+        document.getElementById("overtimeType").value = id;
+
+    }
 </script>
 
 

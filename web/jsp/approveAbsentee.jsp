@@ -107,17 +107,16 @@
         <section>
             <h1 class="entry-title"><span>Approve Absentee</span></h1>
             <hr>
-            <form class="form-horizontal" method="post"  name="signup" id="signup" enctype="multipart/form-data">
+            <form class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data">
                 <div class="form-group">
 
                     <label class="control-label col-sm-3">Name</label>
                     <div class="col-md-8 col-sm-9">
                         <div class="input-group">
-                            <input type="name" style="width: 250px" class="form-control" name="user" value="${name}" id="name">
+                            <input type="name" style="width: 250px" class="form-control" name="user" value="${name}"
+                                   id="name">
                         </div>
                     </div>
-
-
 
 
                 </div>
@@ -138,8 +137,6 @@
                         </div>
                     </div>
                 </div>
-
-
 
 
                 <div class="form-group">
@@ -163,7 +160,7 @@
 <script src="<spring:url value="/assets/dist/js/bootstrap-datepicker.js"/>"></script>
 
 <script type="text/javascript">
-    $('.input-daterange input').each(function() {
+    $('.input-daterange input').each(function () {
         $(this).datepicker({
             format: 'dd/mm/yyyy'
 
@@ -173,21 +170,21 @@
 <script>
     function onSave() {
 
-    $.ajax({
+        $.ajax({
             type: "post",
             url: "/${id}/approveuser",
             datatype: 'json',
             data: {
                 name: document.getElementById("name").value,
-                leaveSelect:document.getElementById("leaveSelect").value,
+                leaveSelect: document.getElementById("leaveSelect").value,
             },
 
             success: function (response) {
                 alert("User Successfully Added");
                 document.getElementById("name").value = "";
-                document.getElementById("leaveSelect").value="",
+                document.getElementById("leaveSelect").value = "",
 
-                document.location="/approvals";
+                        document.location = "/approvals";
 
             },
             error: function (jqXHR, exception) {

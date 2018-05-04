@@ -79,7 +79,7 @@
             </button>
             <c:if test="${not empty pageContext.request.userPrincipal}">
 
-                <a class="navbar-brand" style="color:white;" ><sec:authentication
+                <a class="navbar-brand" style="color:white;"><sec:authentication
                         property="principal.username"/></a>
             </c:if>
         </div>
@@ -120,7 +120,7 @@
         <section>
             <h1 class="entry-title"><span>Update Employee</span></h1>
             <hr>
-            <form class="form-horizontal" method="POST" name="Staff" action="" id="signup"
+            <form class="form-horizontal" method="POST" name="Staff" id="signup"
                   enctype="multipart/form-data">
                 <div class="form-group">
 
@@ -161,7 +161,8 @@
                     <label class="control-label col-sm-3">Hours Worked</label>
                     <div class="col-md-2">
                         <div class="input-group input-timerange">
-                            <input type="text" name="before" id="hoursWorked" value="${hoursWorked}" class="form-control ">
+                            <input type="text" name="before" id="hoursWorked" value="${hoursWorked}"
+                                   class="form-control ">
 
                         </div>
                     </div>
@@ -191,8 +192,52 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="control-label col-sm-3">Family Responsibility Balance</label>
+                    <div class="col-md-5 col-sm-8">
+                        <div class="input-group">
+                            <input type="text" name="department" style="width: 250px" class="form-control"
+                                   value="${famleaveBalance}" id="famleaveBalance">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Sick Leave Due (3 years)</label>
+                    <div class="col-md-5 col-sm-8">
+                        <div class="input-group">
+                            <input type="text" name="department" style="width: 250px" class="form-control"
+                                   value="${sickleaveDue}" id="sickleaveDue">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Family Responsibility Due(Year)</label>
+                    <div class="col-md-5 col-sm-8">
+                        <div class="input-group">
+                            <input type="text" name="department" style="width: 250px" class="form-control"
+                                   value="${famleaveDue}" id="famleaveDue">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Leave Due(Per Month)</label>
+                    <div class="col-md-5 col-sm-8">
+                        <div class="input-group">
+                            <input type="text" name="department" style="width: 250px" class="form-control"
+                                   value="${leaveDue}" id="leaveDue">
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
                     <div class="col-xs-offset-3 col-xs-10">
-                        <input type="button"  type="button" value="Save" onclick="onSave()" class="btn btn-primary">
+                        <input type="button" type="button" value="Save" onclick="onSave()" class="btn btn-primary">
                         <input type="button" value="Back" class="btn btn-primary"
                                onclick="window.location='/updatelist'">
 
@@ -218,7 +263,6 @@
     function onSave() {
 
 
-
         $.ajax({
             type: "post",
             url: "/update",
@@ -227,17 +271,20 @@
                 name: document.getElementById("name").value,
                 employmentDate: document.getElementById("empDate").value,
                 department: document.getElementById("department").value,
-                leaveBalance:document.getElementById("leaveBalance").value,
-                hoursWorked:document.getElementById("hoursWorked").value,
-                sickleaveBalance:document.getElementById("sickleaveBalance").value
-
+                leaveBalance: document.getElementById("leaveBalance").value,
+                hoursWorked: document.getElementById("hoursWorked").value,
+                sickleaveBalance: document.getElementById("sickleaveBalance").value,
+                sickLeaveDue: document.getElementById("sickleaveDue").value,
+                leaveDue: document.getElementById("leaveDue").value,
+                famleaveDue: document.getElementById("famleaveDue").value,
+                famleaveBalance:document.getElementById("famleaveBalance").value
 
 
             },
 
             success: function (response) {
                 alert("User Successfully updated");
-              window.location.href="/updatelist"
+                window.location.href = "/updatelist"
 
             },
             error: function () {

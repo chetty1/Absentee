@@ -15,7 +15,7 @@
     <link href="<spring:url value="/assets/font-awesome/css/font-awesome.css"/>" rel="stylesheet">
 
 
-    <title>View Menu</title>
+    <title>Approval List</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#000b54" role="navigation">
@@ -31,7 +31,7 @@
             </button>
             <c:if test="${not empty pageContext.request.userPrincipal}">
 
-                <a class="navbar-brand" style="color:white;" ><sec:authentication
+                <a class="navbar-brand" style="color:white;"><sec:authentication
                         property="principal.username"/></a>
             </c:if>
         </div>
@@ -85,7 +85,8 @@
 
                         <td>
 
-                            <a type="button" href="${itemLists.id}/approve" class="btn button-info" style="background-color: #4580e0;  color: white">view</a>
+                            <a type="button" href="${itemLists.id}/approve" class="btn button-info"
+                               style="background-color: #4580e0;  color: white">view</a>
 
                         </td>
 

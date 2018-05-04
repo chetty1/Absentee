@@ -21,16 +21,20 @@ public class Staff {
     public String name;
     public String username;
     public String password;
-    public int leaveBalance;
+    public double leaveBalance;
+    public int famRespon;
     public String employmentDate;
     public String hoursWorked;
     public String department;
     public int sickLeaveBalance;
+    public int  sickLeaveDue;
+    public double leaveDue;
+    public int famResponDue;
 
     public ArrayList<String> role;
 
 
-    public Staff(String name, String username, String password, ArrayList<String> role, String employmentDate, int leaveBalance, String hoursWorked, String department,int sickLeaveBalance) {
+    public Staff(String name, String username, String password, ArrayList<String> role, String employmentDate, int leaveBalance, String hoursWorked, String department,int sickLeaveBalance,int sickLeaveDue,double leaveDue,int famRespon,int famResponDue) {
         this.name = name;
         this.username = username;
         this.password = password;
@@ -40,47 +44,27 @@ public class Staff {
         this.hoursWorked = hoursWorked;
         this.department = department;
         this.sickLeaveBalance=sickLeaveBalance;
+        this.sickLeaveDue = sickLeaveDue;
+        this.leaveDue = leaveDue;
+        this.famRespon=famRespon;
+        this.famResponDue = famResponDue;
 
     }
 
-    public int getSickLeaveBalance() {
-        return sickLeaveBalance;
+    public int getFamRespon() {
+        return famRespon;
     }
 
-    public void setSickLeaveBalance(int sickLeaveBalance) {
-        this.sickLeaveBalance = sickLeaveBalance;
+    public void setFamRespon(int famRespon) {
+        this.famRespon = famRespon;
     }
 
-    public String getDepartment() {
-        return department;
+    public int getFamResponDue() {
+        return famResponDue;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getHoursWorked() {
-        return hoursWorked;
-    }
-
-    public void setHoursWorked(String hoursWorked) {
-        this.hoursWorked = hoursWorked;
-    }
-
-    public String getEmploymentDate() {
-        return employmentDate;
-    }
-
-    public void setEmploymentDate(String employmentDate) {
-        this.employmentDate = employmentDate;
-    }
-
-    public int getLeaveBalance() {
-        return leaveBalance;
-    }
-
-    public void setLeaveBalance(int leaveBalance) {
-        this.leaveBalance = leaveBalance;
+    public void setFamResponDue(int famResponDue) {
+        this.famResponDue = famResponDue;
     }
 
     public String getId() {
@@ -113,6 +97,62 @@ public class Staff {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public double getLeaveBalance() {
+        return leaveBalance;
+    }
+
+    public void setLeaveBalance(double leaveBalance) {
+        this.leaveBalance = leaveBalance;
+    }
+
+    public String getEmploymentDate() {
+        return employmentDate;
+    }
+
+    public void setEmploymentDate(String employmentDate) {
+        this.employmentDate = employmentDate;
+    }
+
+    public String getHoursWorked() {
+        return hoursWorked;
+    }
+
+    public void setHoursWorked(String hoursWorked) {
+        this.hoursWorked = hoursWorked;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public int getSickLeaveBalance() {
+        return sickLeaveBalance;
+    }
+
+    public void setSickLeaveBalance(int sickLeaveBalance) {
+        this.sickLeaveBalance = sickLeaveBalance;
+    }
+
+    public int getSickLeaveDue() {
+        return sickLeaveDue;
+    }
+
+    public void setSickLeaveDue(int sickLeaveDue) {
+        this.sickLeaveDue = sickLeaveDue;
+    }
+
+    public double getLeaveDue() {
+        return leaveDue;
+    }
+
+    public void setLeaveDue(double leaveDue) {
+        this.leaveDue = leaveDue;
     }
 
     public ArrayList<String> getRole() {
@@ -149,7 +189,10 @@ public class Staff {
                 this.username.equals(staff.username) &&
                 this.hoursWorked.equals(staff.hoursWorked)&&
                 this.employmentDate.equals(staff.employmentDate) &&
-                this.leaveBalance == staff.leaveBalance;
+                this.leaveBalance == staff.leaveBalance &&
+                this.leaveDue == staff.leaveDue &&
+                this.sickLeaveDue == staff.sickLeaveDue &&
+                this.famResponDue == staff.famResponDue;
     }
 
     @Override
@@ -158,12 +201,15 @@ public class Staff {
                 name,
                 id,
                 department,
-               hoursWorked,
+                hoursWorked,
                 department,
                 username,
                 password,
                 employmentDate,
-                leaveBalance
+                leaveBalance,
+                leaveDue,
+                sickLeaveDue,
+                famResponDue
 
         );
     }

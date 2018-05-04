@@ -18,6 +18,7 @@
         <intercept-url pattern="/stats" access="hasRole('ROLE_MANAGER')"/>
         <intercept-url pattern="/updatelist" access="hasAnyRole('ROLE_MANAGER','ROLE_HR','ROLE_LINDA')"/>
         <intercept-url pattern="/approvals" access="hasRole('ROLE_HR')"/>
+        <intercept-url pattern="/editlist" access="hasAnyRole('ROLE_REGISTER')"/>
 
         <intercept-url pattern="/factoryoverview" access="hasAnyRole('ROLE_LINDA','ROLE_MANAGER')"></intercept-url>
 

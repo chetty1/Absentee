@@ -44,11 +44,11 @@
                     <a style="color: white" href="/updatelist">Update Employees</a>
                 </li>
 
-<sec:authorize access="hasRole('ROLE_MANAGER') and isAuthenticated()">
-    <li>
-    <a style="color: white" href="/stats">Factory Statistics</a>
-    </li>
-    </sec:authorize>
+                <sec:authorize access="hasRole('ROLE_MANAGER') and isAuthenticated()">
+                    <li>
+                        <a style="color: white" href="/stats">Factory Statistics</a>
+                    </li>
+                </sec:authorize>
 
                 <li>
                     <a style="color: white" href="/logout">Logout</a>
@@ -74,26 +74,27 @@
             <h1 class="page-header">
                 <h3>Factory Overview: ${datebefore}-${dateafter}</h3>
             </h1>
-            <form class="form-horizontal" name="factoryoverview" id="factoryoverview" method="POST" action="/factoryoverview" enctype="multipart/form-data">
+            <form class="form-horizontal" name="factoryoverview" id="factoryoverview" method="POST"
+                  action="/factoryoverview" enctype="multipart/form-data">
 
-            <div class="col-md-5">
-                <div class="input-group input-daterange">
-                    <input type="text" name="before" id="before" class="form-control">
-                    <div class="input-group-addon">To</div>
-                    <input type="text" name="after" id="after" class="form-control">
+                <div class="col-md-5">
+                    <div class="input-group input-daterange">
+                        <input type="text" name="before" id="before" class="form-control">
+                        <div class="input-group-addon">To</div>
+                        <input type="text" name="after" id="after" class="form-control">
+                    </div>
+
                 </div>
-
-            </div>
 
                 <button type="submit" name="button" onclick="onSave()" class="btn btn-default" data-dismiss="modal">
                     Search
                 </button>
-                </form>
-            </div>
+            </form>
         </div>
+    </div>
 
 
-<div class="row">
+    <div class="row">
         <p></p>
         <div class="col-md-12">
             <table class="table table-bordered" style="text-align: center" id="teaTable">
@@ -106,13 +107,15 @@
                     <th style="text-align: center">Hrs Late</th>
                     <th style="text-align: center">Over Time(1/2)</th>
                     <th style="text-align: center">Over Time(2)</th>
-                    <th style="text-align: center">Unpaid Leave</th>
-                    <th style="text-align: center">Sick Leave</th>
-                    <th style="text-align: center">Family Respon</th>
                     <th style="text-align: center">Site Local</th>
                     <th style="text-align: center">Site Away</th>
-                    <th style="text-align: center">Annual Leave</th>
-                    <th style="text-align: center">Over Time Leave</th>
+                    <th style="text-align: center">Unpaid</th>
+                    <th style="text-align: center">Sick</th>
+                    <th style="text-align: center">Family</th>
+                    <th style="text-align: center">Annual</th>
+                    <th style="text-align: center">Over Time</th>
+                    <th style="text-align: center">Sick(balance)</th>
+                    <th style="text-align: center">Annual(balance)</th>
 
                 </tr>
                 </thead>
@@ -127,13 +130,16 @@
                             <td>${List.value.hrsLate}</td>
                             <td>${List.value.overTimeHrshalf}</td>
                             <td>${List.value.overtimeHrsDouble}</td>
+                            <td>${List.value.onSiteLocal}</td>
+                            <td>${List.value.onSiteAway}</td>
                             <td>${List.value.unpaidLeave}</td>
                             <td>${List.value.sickLeave}</td>
                             <td>${List.value.famRespon}</td>
-                            <td>${List.value.onSiteLocal}</td>
-                            <td>${List.value.onSiteAway}</td>
                             <td>${List.value.annualLeave}</td>
                             <td>${List.value.otLeave}</td>
+                            <td>${List.value.staff.sickLeaveBalance}</td>
+                            <td>${List.value.staff.leaveBalance}</td>
+
                         </tr>
                     </c:forEach>
                 </c:if>
@@ -160,25 +166,25 @@
 
 <script>
     function onSave() {
-          $.ajax({
-         type: "post",
-         url: "/getdate",
-         datatype: 'json',
-         data: {
-         before: document.getElementById("before").value,
-         after:document.getElementById("after").value,
-         },
+        $.ajax({
+            type: "post",
+            url: "/getdate",
+            datatype: 'json',
+            data: {
+                before: document.getElementById("before").value,
+                after: document.getElementById("after").value,
+            },
 
-         success: function (response) {
-         document.getElementById("before").value = "",
-         document.getElementById("after").value=""
+            success: function (response) {
+                document.getElementById("before").value = "",
+                        document.getElementById("after").value = ""
 
 
-         },
-         error: function (jqXHR, exception) {
-         alert('Something is wrong');
-         }
-         });
+            },
+            error: function (jqXHR, exception) {
+                alert('Something is wrong');
+            }
+        });
     }
 </script>
 

@@ -361,8 +361,8 @@
             ],
             colors: ['#FF3835', '#515151', '#6C76FF', '#ddd'],
             /*formatter: function (x) { return x + "%"}
-        }).on('click', function(i, row){
-            console.log(i, row);*/
+             }).on('click', function(i, row){
+             console.log(i, row);*/
         });
 
         Morris.Line({
@@ -389,13 +389,13 @@
         </c:if>
 
 
-    ],
+        ],
         xkey: 'y',
-            ykeys
-    :
+                ykeys
+        :
         ['a', 'b', 'c', 'd'],
-            labels
-    :
+                labels
+        :
         ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
 
 
@@ -439,7 +439,7 @@
 
             success: function (response) {
                 document.getElementById("before").value = "",
-                    document.getElementById("after").value = ""
+                        document.getElementById("after").value = ""
 
 
             },

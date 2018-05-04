@@ -46,7 +46,6 @@ public class successHandler implements AuthenticationSuccessHandler {
         String url = "/register";
         for (GrantedAuthority auth : user.getAuthorities()) {
 
-            System.out.println(auth.getAuthority());
             switch (auth.getAuthority()) {
                 case "ROLE_REGISTER":
                     url = "/register";
