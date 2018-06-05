@@ -63,134 +63,58 @@ public class registerController {
 
         String name = request.getParameter("name");
         Staff staff1 = repo.findByName(name);
-        String overtimeType = request.getParameter("overtimeType");
         String beforeTime = request.getParameter("beforeTime");
-        String afterTime = request.getParameter("afterTime");
         String absent = request.getParameter("absent");
         String localbefore = request.getParameter("onsiteLocalbefore");
-        String localafter = request.getParameter("onsiteafter");
         String awaybefore = request.getParameter("onsiteawaybefore");
-        String awayafter = request.getParameter("onsiteawayAfter");
+        String doublepay = request.getParameter("doublepay");
+        String timeandahalf = request.getParameter("timeandahalf");
         String date = request.getParameter("date");
-        System.out.println(overtimeType);
+        String holiday = request.getParameter("holiday");
+        String hourslate = request.getParameter("hourslate");
+        boolean holidaybool = Boolean.parseBoolean(holiday);
         boolean absentbool = Boolean.parseBoolean(absent);
-        if (localafter.equals("") || localafter == null) {
-            localafter = "00:00";
-        }
-        if (localbefore.equals("") || localbefore == null) {
-            localbefore = "00:00";
-        }
-        if (awayafter.equals("") || awayafter == null) {
-            awayafter = "00:00";
-        }
-        if (awaybefore.equals("") || awaybefore == null) {
-            awayafter = "00:00";
-        }
-        String hrsOnsiteLocal = getHoursandMinWorked(localbefore, localafter);
-        String hrsOnsiteAway = getHoursandMinWorked(awaybefore, awayafter);
 
 
-
-        OverView view = new OverView(staff1, "00:00", "00:00", "00:00", "00:00", "0", "0", "0", "00:00", "00:00", "0", "0", true, "0", date);
-
-
-        view.setStaff(staff1);
-
-
-        if (absentbool) {
-            view.setApproved(false);
-        } else {
-
-            PeriodFormatter hoursMinutes = new PeriodFormatterBuilder()
-                    .appendHours()
-                    .appendSeparator(":")
-                    .appendMinutes()
-                    .toFormatter();
-
-            Period late = Period.parse(getHoursandMinDifference(staff1, beforeTime, afterTime, date), hoursMinutes);
-            late = late.minusMinutes(15);
-            late = late.normalizedStandard(PeriodType.time());
-            String totaltimesite1 = addTime(hrsOnsiteLocal, String.valueOf(late.getHours()) + ":" + String.valueOf(late.getMinutes()));
-            Period plate = Period.parse(addTime(totaltimesite1, hrsOnsiteAway), hoursMinutes);
-           plate= plate.normalizedStandard(PeriodType.time());
-            if (plate.getMinutes() >= 0 && plate.getHours() >= 0 && !absentbool) {
-                switch (overtimeType) {
-                    case "Time and a Half":
-                        view.setOverTimeHrshalf(String.valueOf(plate.getHours()) + ":" + String.valueOf(plate.getMinutes()));
-                        break;
-                    case "Double Pay":
-                        view.setOvertimeHrsDouble(String.valueOf(plate.getHours()) + ":" + String.valueOf(plate.getMinutes()));
-                        break;
-                }
-
-            } else if (plate.getMinutes() <= 0 && plate.getHours() <= 0 && !absentbool) {
-
-                view.setHrsLate(String.valueOf(plate.getHours()) + ":" + String.valueOf(plate.getMinutes()));
-            }
-
-
-            SimpleDateFormat day = new SimpleDateFormat("EEEE");
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-            String days = day.format(format.parse(date));
-            if (days.equals("Friday")) {
-                Period period=Period.parse(getHoursandMinWorked(beforeTime, afterTime), hoursMinutes).plusMinutes(15).normalizedStandard(PeriodType.time());
-                        String totaltimesite = addTime(hrsOnsiteLocal,String.valueOf(period.getHours())+":"+String.valueOf(period.getMinutes() ));
-                String time = addTime(totaltimesite, hrsOnsiteAway);
-                Period halfot = Period.parse(view.getOverTimeHrshalf(), hoursMinutes);
-                Period doubleot = Period.parse(view.getOvertimeHrsDouble(), hoursMinutes);
-                Period hworked = Period.parse(time, hoursMinutes);
-                hworked = hworked.minusMinutes(halfot.getMinutes() + doubleot.getMinutes());
-                hworked = hworked.minusHours(halfot.getHours() + doubleot.getHours());
-                hworked = hworked.normalizedStandard(PeriodType.time());
-                view.setHrsWorked(String.valueOf(hworked.getHours()) + ":" + String.valueOf(hworked.getMinutes()));
-                view.setOnSiteAway(hrsOnsiteAway);
-                view.setOnSiteLocal(hrsOnsiteLocal);
-            }
-
-
-
-            else {
-                String totaltimesite="";
-                String time="";
-
-
-                  Period period=  Period.parse(getHoursandMinWorked(beforeTime, afterTime), hoursMinutes).minusMinutes(15).normalizedStandard(PeriodType.time());
-
-                    totaltimesite = addTime(hrsOnsiteLocal,String.valueOf(period.getHours())+":"+String.valueOf(period.getMinutes()));
-                    time  = addTime(totaltimesite, hrsOnsiteAway);
-                    System.out.println(time);
-
-                Period halfot = Period.parse(view.getOverTimeHrshalf(), hoursMinutes);
-                Period doubleot = Period.parse(view.getOvertimeHrsDouble(), hoursMinutes);
-                Period hworked = Period.parse(time, hoursMinutes);
-
-
-                hworked = hworked.minusMinutes(halfot.getMinutes() + doubleot.getMinutes());
-                hworked = hworked.minusHours(halfot.getHours() + doubleot.getHours());
-                hworked = hworked.normalizedStandard(PeriodType.time());
-                view.setHrsWorked(String.valueOf(hworked.getHours()) + ":" + String.valueOf(hworked.getMinutes()));
-                view.setOnSiteAway(hrsOnsiteAway);
-                view.setOnSiteLocal(hrsOnsiteLocal);
-            }
-        }
-
-
-        if (staff1 == null || date == null || date.equals("")) {
-
-
+        if (date == null || date.equals("")) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-
         } else {
-            repository.save(view);
-            return new ResponseEntity(HttpStatus.OK);
+
+            if (absentbool) {
+
+                repository.save(new OverView(staff1, "00:00", "00:00", "00:00", "00:00", "0", "0", "0", "00:00", "00:00", "0", "0", false, "0", date));
+
+
+                return new ResponseEntity(HttpStatus.OK);
+            } else if (holidaybool) {
+                ArrayList<Staff> staffList = new ArrayList<>(repo.findAll());
+
+                for (Staff staff : staffList) {
+if(staff.getHoursWorked()==null){
+    repository.save(new OverView(staff, "00:00", "00:00", "00:00", "00:00", "0", "0", "0", "00:00", "00:00", "0", "0", true, "0", date));
+
+}
+else{
+    repository.save(new OverView(staff, "00:00", "00:00", staff.getHoursWorked(), "00:00", "0", "0", "0", "00:00", "00:00", "0", "0", true, "0", date));
+
+}
+
+
+                }
+                return new ResponseEntity(HttpStatus.OK);
+            } else if (!absentbool && !holidaybool) {
+                repository.save(new OverView(staff1, timeandahalf, doublepay, beforeTime, hourslate, "0", "0", "0", localbefore, awaybefore, "0", "0", true, "0", date));
+
+                return new ResponseEntity(HttpStatus.OK);
+
+            }
+
 
         }
-
+        return new ResponseEntity(HttpStatus.OK);
     }
-
-
-    public String addTime(String time1, String time2) {
+}
+  /*  public String addTime(String time1, String time2) {
         PeriodFormatter hoursMinutes = new PeriodFormatterBuilder()
                 .appendHours()
                 .appendSeparator(":")
@@ -263,5 +187,4 @@ public class registerController {
 
         return hoursandmin;
     }
-
-}
+*/

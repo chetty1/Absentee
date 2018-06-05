@@ -192,6 +192,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="panel">
                     <div class="panel-heading panel-heading-white text-center">
                         <h4>Doughnut Chart</h4>
@@ -202,7 +203,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="panel" style="padding:10px;">
+                <div class="panel" >
                     <div class="panel-heading panel-heading-white text-center">
                         <h4>Bar Chart Showing Staff Frequency of Sick leave</h4>
                     </div>
@@ -214,7 +215,7 @@
         </div>
         <div class="col-md-6">
             <div class="col-md-12">
-                <div class="panel" style="padding:15px;">
+                <div class="panel" >
                     <div class="panel-heading panel-heading-white text-center">
                         <h4>Bar Graph Showing Day Frequency of Sick Leave</h4>
                     </div>
@@ -245,15 +246,101 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="panel" style="padding:50px;">
+            <div class="panel" style="padding-bottom: 80px">
                 <div class="panel-heading panel-heading-white">
-                    <h4>Line Graph Showing Overtime vs Hours Worked vs Hours Late</h4>
+                    <h4>Bar Graph Showing Overtime vs Hours Worked vs Hours Late</h4>
                 </div>
                 <div class="panel-body">
                     <div id="line-overtime" style="height:400px;"></div>
                 </div>
             </div>
         </div>
+
+            <div class="col-md-6">
+                <div class="panel" >
+                    <div class="panel-heading panel-heading-white text-center">
+                        <h4>Bar Graph Showing Overtime vs Hours Worked vs Hours Late(Sales)</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="bar-sales"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="panel-heading panel-heading-white text-center">
+                        <h4>Bar Graph Showing Overtime vs Hours Worked vs Hours Late(Electrical)</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="bar-electrical"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="panel-heading panel-heading-white text-center">
+                        <h4>Bar Graph Showing Overtime vs Hours Worked vs Hours Late(Machine)</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="bar-machine"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="panel-heading panel-heading-white text-center">
+                        <h4>Line Graph Showing Overtime vs Hours Worked vs Hours Late(Boiler)</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="bar-boiler"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="panel-heading panel-heading-white text-center">
+                        <h4>Line Graph Showing Overtime vs Hours Worked vs Hours Late(Fitting)</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="bar-fitting"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="panel-heading panel-heading-white text-center">
+                        <h4>Bar  Graph Showing Overtime vs Hours Worked vs Hours Late(Stores)</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="bar-stores"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="panel-heading panel-heading-white text-center">
+                        <h4>Bar Graph Showing Overtime vs Hours Worked vs Hours Late(Sanitation)</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="bar-drawing"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="panel-heading panel-heading-white text-center">
+                        <h4>Bar Graph Showing Overtime vs Hours Worked vs Hours Late(Office)</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="bar-office"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </c:if>
 
     </div>
@@ -365,7 +452,7 @@
              console.log(i, row);*/
         });
 
-        Morris.Line({
+        Morris.Bar({
             element: 'line-overtime',
             parseTime: false,
             hideHover: 'auto',
@@ -382,7 +469,7 @@
                     a: ${List.value.overtimeHrsDouble},
                     b: ${List.value.overTimeHrshalf},
                     c:${List.value.hrsWorked},
-                    d:${List.value.hrsLate} * -1
+                    d:${List.value.hrsLate}
         },
 
         </c:forEach>
@@ -391,16 +478,272 @@
 
         ],
         xkey: 'y',
-                ykeys
-        :
-        ['a', 'b', 'c', 'd'],
-                labels
-        :
-        ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
+                ykeys: ['a', 'b', 'c', 'd'],
+                labels: ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
 
 
-    })
-        ;
+    });
+
+        Morris.Bar({
+            element: 'bar-sales',
+            parseTime: false,
+           // hideHover: 'false',
+            resize: true,
+            data: [
+
+
+                <c:if test="${not empty salesFreq}">
+                <c:forEach items="${salesFreq}" var="List">
+
+
+                {
+                    y: '${List.key}',
+                    a: ${List.value.overtimeHrsDouble},
+                    b: ${List.value.overTimeHrshalf},
+                    c:${List.value.hrsWorked},
+                    d:${List.value.hrsLate}
+                },
+
+                </c:forEach>
+                </c:if>
+
+
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b', 'c', 'd'],
+            labels: ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
+
+
+        });
+
+
+        Morris.Bar({
+            element: 'bar-electrical',
+            parseTime: false,
+           // hideHover: 'false',
+            resize: true,
+            data: [
+
+
+                <c:if test="${not empty electricalFreq}">
+                <c:forEach items="${electricalFreq}" var="List">
+
+
+                {
+                    y: '${List.key}',
+                    a: ${List.value.overtimeHrsDouble},
+                    b: ${List.value.overTimeHrshalf},
+                    c:${List.value.hrsWorked},
+                    d:${List.value.hrsLate}
+                },
+
+                </c:forEach>
+                </c:if>
+
+
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b', 'c', 'd'],
+            labels: ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
+
+
+        });
+
+
+        Morris.Bar({
+            element: 'bar-machine',
+            parseTime: false,
+          //  hideHover: 'false',
+            resize: true,
+            data: [
+
+
+                <c:if test="${not empty machineFreq}">
+                <c:forEach items="${machineFreq}" var="List">
+
+
+                {
+                    y: '${List.key}',
+                    a: ${List.value.overtimeHrsDouble},
+                    b: ${List.value.overTimeHrshalf},
+                    c:${List.value.hrsWorked},
+                    d:${List.value.hrsLate}
+                },
+
+                </c:forEach>
+                </c:if>
+
+
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b', 'c', 'd'],
+            labels: ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
+
+
+        });
+
+        Morris.Bar({
+            element: 'bar-boiler',
+            parseTime: false,
+            //hideHover: 'false',
+            resize: true,
+            data: [
+
+
+                <c:if test="${not empty boilerFreq}">
+                <c:forEach items="${boilerFreq}" var="List">
+
+
+                {
+                    y: '${List.key}',
+                    a: ${List.value.overtimeHrsDouble},
+                    b: ${List.value.overTimeHrshalf},
+                    c:${List.value.hrsWorked},
+                    d:${List.value.hrsLate}
+                },
+
+                </c:forEach>
+                </c:if>
+
+
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b', 'c', 'd'],
+            labels: ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
+
+
+        });
+
+        Morris.Bar({
+            element: 'bar-fitting',
+            parseTime: false,
+            //hideHover: 'false',
+            resize: true,
+            data: [
+
+
+                <c:if test="${not empty fittingFreq}">
+                <c:forEach items="${fittingFreq}" var="List">
+
+
+                {
+                    y: '${List.key}',
+                    a: ${List.value.overtimeHrsDouble},
+                    b: ${List.value.overTimeHrshalf},
+                    c:${List.value.hrsWorked},
+                    d:${List.value.hrsLate}
+                },
+
+                </c:forEach>
+                </c:if>
+
+
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b', 'c', 'd'],
+            labels: ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
+
+
+        });
+
+        Morris.Bar({
+            element: 'bar-stores',
+            parseTime: false,
+          //  hideHover: 'false',
+            resize: true,
+            data: [
+
+
+                <c:if test="${not empty storesFreq}">
+                <c:forEach items="${storesFreq}" var="List">
+
+
+                {
+                    y: '${List.key}',
+                    a: ${List.value.overtimeHrsDouble},
+                    b: ${List.value.overTimeHrshalf},
+                    c:${List.value.hrsWorked},
+                    d:${List.value.hrsLate}
+                },
+
+                </c:forEach>
+                </c:if>
+
+
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b', 'c', 'd'],
+            labels: ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
+
+
+        });
+
+        Morris.Bar({
+            element: 'bar-drawing',
+            parseTime: false,
+           // hideHover: 'false',
+            resize: true,
+            data: [
+
+
+                <c:if test="${not empty drawingFreq}">
+                <c:forEach items="${drawingFreq}" var="List">
+
+
+                {
+                    y: '${List.key}',
+                    a: ${List.value.overtimeHrsDouble},
+                    b: ${List.value.overTimeHrshalf},
+                    c:${List.value.hrsWorked},
+                    d:${List.value.hrsLate}
+                },
+
+                </c:forEach>
+                </c:if>
+
+
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b', 'c', 'd'],
+            labels: ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
+
+
+        });
+
+        Morris.Bar({
+            element: 'bar-office',
+            parseTime: false,
+            //hideHover: 'true',
+            resize: true,
+            data: [
+
+
+                <c:if test="${not empty officeFreq}">
+                <c:forEach items="${officeFreq}" var="List">
+
+
+                {
+                    y: '${List.key}',
+                    a: ${List.value.overtimeHrsDouble},
+                    b: ${List.value.overTimeHrshalf},
+                    c:${List.value.hrsWorked},
+                    d:${List.value.hrsLate}
+                },
+
+                </c:forEach>
+                </c:if>
+
+
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b', 'c', 'd'],
+            labels: ['OverTime(2x)', 'Overtime(1/2)', 'Hrs Worked', 'Hrs Late'],
+
+
+        });
+
+
+
 
 
         Morris.Bar({

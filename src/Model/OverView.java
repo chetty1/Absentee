@@ -4,20 +4,15 @@ package Model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-
 /**
  * Created by chett_000 on 2018/03/08.
  */
 @Document(collection = "Overview")
 public class OverView {
 
-@Id
-private String id;
-    private  Staff staff;
+    @Id
+    private String id;
+    private Staff staff;
     private String leaveDays;
     private String overTimeHrshalf;
     private String overtimeHrsDouble;
@@ -34,14 +29,13 @@ private String id;
     private String date;
 
 
-
-    public OverView(){
+    public OverView() {
 
     }
 
-    public OverView(Staff staff,String overTimeHrshalf, String overtimeHrsDouble, String hrsWorked, String hrsLate, String unpaidLeave, String sickLeave, String famRespon, String onSiteLocal, String onSiteAway, String annualLeave, String otLeave,boolean approved,String leaveDays,String date) {
+    public OverView(Staff staff, String overTimeHrshalf, String overtimeHrsDouble, String hrsWorked, String hrsLate, String unpaidLeave, String sickLeave, String famRespon, String onSiteLocal, String onSiteAway, String annualLeave, String otLeave, boolean approved, String leaveDays, String date) {
 
-       this.staff = staff;
+        this.staff = staff;
         this.overTimeHrshalf = overTimeHrshalf;
         this.overtimeHrsDouble = overtimeHrsDouble;
         this.hrsWorked = hrsWorked;
@@ -53,11 +47,10 @@ private String id;
         this.onSiteAway = onSiteAway;
         this.annualLeave = annualLeave;
         this.otLeave = otLeave;
-        this.approved=approved;
-        this.leaveDays=leaveDays;
+        this.approved = approved;
+        this.leaveDays = leaveDays;
         this.date = date;
     }
-
 
 
     public String getDate() {
@@ -76,12 +69,14 @@ private String id;
         this.id = id;
     }
 
-    public void setLeaveDays(String leaveDays){
-        this.leaveDays=leaveDays;
+    public void setLeaveDays(String leaveDays) {
+        this.leaveDays = leaveDays;
     }
-    public String getLeaveDays(){
-      return  leaveDays;
+
+    public String getLeaveDays() {
+        return leaveDays;
     }
+
     public boolean isApproved() {
         return approved;
     }

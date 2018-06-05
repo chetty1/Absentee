@@ -17,7 +17,53 @@
     <link href="<spring:url value="/assets/dist/css/bootstrap-datepicker.css"/>" rel="stylesheet">
 
     <title>Overview</title>
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+        }
+
+        .navbar {
+            height: 50px;
+            padding: 0 15px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+        }
+
+        .table-area {
+            position: relative;
+            z-index: 0;
+            margin-top: 50px;
+        }
+
+        table.responsive-table {
+            display: table;
+            /* required for table-layout to be used (not normally necessary; included for completeness) */
+            table-layout: fixed;
+            /* this keeps your columns with fixed with exactly the right width */
+            width: 100%;
+            /* table must have width set for fixed layout to work as expected */
+            height: 100%;
+        }
+
+        table.responsive-table thead {
+            position: fixed;
+            top: 50px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 50px;
+            line-height: 3em;
+            background: #eee;
+            table-layout: fixed;
+            display: table;
+        }
+
+
+    </style>
 </head>
+
 <body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#000b54" role="navigation">
@@ -40,9 +86,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li>
-                    <a style="color: white" href="/updatelist">Update Employees</a>
-                </li>
+
+                <sec:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_HR','ROLE_LINDA') and isAuthenticated()">
+
+                    <li>
+                        <a style="color: white" href="/updatelist">Update Employees</a>
+                    </li>
+                </sec:authorize>
 
                 <sec:authorize access="hasRole('ROLE_MANAGER') and isAuthenticated()">
                     <li>
@@ -50,7 +100,14 @@
                     </li>
                 </sec:authorize>
 
+                <sec:authorize access="hasAnyRole('ROLE_REGISTER') and isAuthenticated()">
+
+                    <li>
+                        <a style="color: white" href="/register">Factory Statistics</a>
+                    </li>
+                </sec:authorize>
                 <li>
+
                     <a style="color: white" href="/logout">Logout</a>
                 </li>
             </ul>
@@ -96,8 +153,8 @@
 
     <div class="row">
         <p></p>
-        <div class="col-md-12">
-            <table class="table table-bordered" style="text-align: center" id="teaTable">
+        <div class="col-md-12 table-area">
+            <table class="responsive-table table table-bordered" style="text-align: center" id="teaTable">
                 <thead>
                 <tr>
 

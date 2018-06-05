@@ -38,13 +38,15 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li>
+<sec:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_HR','ROLE_LINDA') and isAuthenticated()">
+
+<li>
                     <a style="color: white" href="/updatelist">Update Employee</a>
                 </li>
                 <li>
                     <a style="color: white" href="/logout">Logout</a>
                 </li>
-
+</sec:authorize>
             </ul>
 
 

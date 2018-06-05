@@ -20,7 +20,7 @@
 
 
         #custom-search-input {
-            margin:0;
+            margin: 0;
             margin-top: 10px;
             padding: 0;
         }
@@ -51,7 +51,7 @@
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
             border-radius: 3px;
-            color:#D9230F;
+            color: #D9230F;
         }
 
         .search-query:focus + button {
@@ -61,19 +61,20 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top"style="background-color:#000b54" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#000b54" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-<c:if test="${not empty pageContext.request.userPrincipal}">
-<a class="navbar-brand" style="color:white;" ><sec:authentication property="principal.username" /></a>
-    </c:if>
+            <c:if test="${not empty pageContext.request.userPrincipal}">
+                <a class="navbar-brand" style="color:white;"><sec:authentication property="principal.username"/></a>
+            </c:if>
 
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -99,7 +100,6 @@
 <div class="container">
 
 
-
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
@@ -109,11 +109,12 @@
         <p></p>
         <div class="row">
 
-            <form  method="post" action="/editlist"  enctype="multipart/form-data">
+            <form method="post" action="/editlist" enctype="multipart/form-data">
 
                 <div id="custom-search-input">
                     <div class="input-group col-lg-3" style="left: 1%">
-                        <input type="text" class="  search-query form-control"  name="search" id="search" placeholder="Search" />
+                        <input type="text" class="  search-query form-control" name="search" id="search"
+                               placeholder="Search"/>
                         <span class="input-group-btn">
                                     <button class="btn btn-danger" onclick="onSearch()" type="submit">
                                         <span class=" glyphicon glyphicon-search"></span>
@@ -131,6 +132,13 @@
             <tr>
                 <th style="text-align: center">Date</th>
                 <th style="text-align: center">Name</th>
+                <th style="text-align: center">Hrs Worked</th>
+                <th style="text-align: center">Hrs Late</th>
+                <th style="text-align: center">Overtime(1/2)</th>
+                <th style="text-align: center">Overtime(2x)</th>
+                <th style="text-align: center">On Site(Local)</th>
+                <th style="text-align: center">On Site(Away)</th>
+
                 <th style="text-align: center">View</th>
 
             </tr>
@@ -141,14 +149,21 @@
                 <c:forEach items="${editList}" var="List">
                     <tr>
 
-                        <th >${List.date}</th>
+                        <th>${List.date}</th>
                         <td>${List.staff.name}</td>
+                        <td>${List.hrsWorked}</td>
+                        <td>${List.hrsLate}</td>
+                        <td>${List.overTimeHrshalf}</td>
+                        <td>${List.overtimeHrsDouble}</td>
+                        <td>${List.onSiteLocal}</td>
+                        <td>${List.onSiteAway}</td>
                         <td>
 
                             <a type="button" href="${List.id}/edit" class="btn button-info"
                                style="background-color: #4580e0;  color: white">view</a>
 
                         </td>
+
                     </tr>
                 </c:forEach>
             </c:if>
@@ -156,8 +171,6 @@
             </tbody>
         </table>
     </div>
-
-
 
 
 </div>

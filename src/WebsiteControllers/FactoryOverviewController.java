@@ -18,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * Created by chett_000 on 2018/03/07.
@@ -49,7 +50,7 @@ public class FactoryOverviewController {
 
         ArrayList<OverView> oview = new ArrayList<>();
 
-        HashMap<String, OverView> map = new HashMap<>();
+        TreeMap<String, OverView> map = new TreeMap<>();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
 

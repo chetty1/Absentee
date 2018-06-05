@@ -101,7 +101,7 @@
             </button>
             <c:if test="${not empty pageContext.request.userPrincipal}">
 
-                <a class="navbar-brand" style="color:white;" href="/approvals"><sec:authentication
+                <a class="navbar-brand" style="color:white;" ><sec:authentication
                         property="principal.username"/></a>
             </c:if>
         </div>
@@ -112,6 +112,10 @@
 
                 <li>
                     <a style="color: white" href="/editlist">Edit List</a>
+                </li>
+
+                <li>
+                    <a style="color: white" href="/factoryoverview">Factory Overview</a>
                 </li>
                 <li>
                     <a style="color: white" href="/logout">Logout</a>
@@ -144,12 +148,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Clock In Range</label>
+                    <label class="control-label col-sm-3">Hours Worked</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
                             <input type="text" id="beforeTime" value="00:00" name="beforeTime" class="form-control ">
-                            <div class="input-group-addon">To</div>
-                            <input type="text" id="afterTime" value="00:00" name="afterTime" class="form-control">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Hours Late</label>
+                    <div class="col-md-4 col-sm-9">
+                        <div class="input-group input-timerange">
+                            <input type="text" id="hourslate" name="beforeTime" value="00:00"
+                                   class="form-control ">
+
                         </div>
                     </div>
 
@@ -160,8 +174,7 @@
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
                             <input type="text" id="beforeOnsite" name="beforeTime" value="00:00" class="form-control ">
-                            <div class="input-group-addon">To</div>
-                            <input type="text" id="afterOnsite" name="afterTime" value="00:00" class="form-control">
+
                         </div>
                     </div>
 
@@ -174,12 +187,40 @@
                         <div class="input-group input-timerange">
                             <input type="text" id="beforeawaySite" name="beforeTime" value="00:00"
                                    class="form-control ">
-                            <div class="input-group-addon">To</div>
-                            <input type="text" id="afterawaySite" name="afterTime" value="00:00" class="form-control">
+
                         </div>
                     </div>
 
                 </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Time and a Half</label>
+                    <div class="col-md-4 col-sm-9">
+                        <div class="input-group input-timerange">
+                            <input type="text" id="timeandahalf" name="beforeTime" value="00:00"
+                                   class="form-control ">
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Double Pay</label>
+                    <div class="col-md-4 col-sm-9">
+                        <div class="input-group input-timerange">
+                            <input type="text" id="doublepay" name="beforeTime" value="00:00"
+                                   class="form-control ">
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
 
 
                 <div class="form-group">
@@ -193,26 +234,7 @@
 
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-sm-3">Overtime Type</label>
-                    <div class="col-md-8 col-sm-8">
-                        <div class="input-group" style="padding-top: 8px">
-                            <label id="radio2" class="form-check-label">
-                                <input type="radio" class="form-check-input"  name="radio"
-                                       id="Time and a Half" value="option1">
-                                Time and a Half
-                            </label>
 
-                            <label id="radio1"  class="form-check-label">
-                                <input type="radio" class="form-check-input"  name="radio"
-                                       id="Double Pay" value="option1">
-                                Double Pay
-                            </label>
-
-                            <input type="hidden" id="overtimeType" name="time" value="">
-                        </div>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-3">Absent</label>
@@ -221,6 +243,21 @@
                             <label class="form-check-label">
                                 <input type="checkbox" class="checkbox-inline" name="absent"
                                        id="Absent" value="option1">
+
+                            </label>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Public Holiday</label>
+                    <div class="col-md-8 col-sm-8">
+                        <div class="input-group" style="padding-top: 8px">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="checkbox-inline" name="absent"
+                                       id="Public Holiday" value="option1">
 
                             </label>
 
@@ -304,31 +341,28 @@
             data: {
                 name: document.getElementById("name").value,
                 beforeTime: document.getElementById("beforeTime").value,
-                afterTime: document.getElementById("afterTime").value,
                 onsiteLocalbefore: document.getElementById("beforeOnsite").value,
-                onsiteafter: document.getElementById("afterOnsite").value,
                 onsiteawaybefore: document.getElementById("beforeawaySite").value,
-                onsiteawayAfter: document.getElementById("afterawaySite").value,
+                timeandahalf:document.getElementById("timeandahalf").value,
+                doublepay:document.getElementById("doublepay").value,
                 date: document.getElementById("date").value,
-                overtimeType: document.getElementById("overtimeType").value,
-                absent: document.getElementById("Absent").checked
+                absent: document.getElementById("Absent").checked,
+                holiday:document.getElementById("Public Holiday").checked,
+                hourslate:document.getElementById("hourslate").value
             },
 
             success: function (response) {
                 alert("User Successfully Added");
                 document.getElementById("name").value = "",
                         document.getElementById("beforeTime").value = "00:00",
-                        document.getElementById("afterTime").value = "00:00",
                         document.getElementById("beforeOnsite").value = "00:00",
-                        document.getElementById("afterOnsite").value = "00:00",
                         document.getElementById("beforeawaySite").value = "00:00",
-                        document.getElementById("afterawaySite").value = "00:00",
-                        document.getElementById("overtimeType").value = "",
                         document.getElementById("Absent").checked = false,
-                        document.getElementById("Time and a Half").checked = false,
                         document.getElementById("date").value = "",
-
-                        document.getElementById("Double Pay").checked = false;
+                        document.getElementById("Public Holiday").checked = false,
+                        document.getElementById("timeandahalf").value="00:00",
+                        document.getElementById("doublepay").value= "00:00",
+                document.getElementById("hourslate").value="00:00"
 
 
             },
@@ -339,43 +373,7 @@
 
     }
 </script>
-<script>
-    $('#radio1').click(function(e) {
-        e.preventDefault();
 
-        var radio = $(this).find('input[type=radio]');
-
-        if (radio.is(':checked')) {
-            radio.prop('checked', false);
-            document.getElementById("overtimeType").value = "";
-
-        } else {
-            radio.prop('checked', true);
-            document.getElementById("overtimeType").value = "Double Pay";
-
-        }
-
-    });
-
-    $('#radio2').click(function(e) {
-        e.preventDefault();
-
-        var radio = $(this).find('input[type=radio]');
-
-        if (radio.is(':checked')) {
-            radio.prop('checked', false);
-            document.getElementById("overtimeType").value = "";
-
-
-        } else {
-            radio.prop('checked', true);
-
-            document.getElementById("overtimeType").value = "Time and a Half";
-
-        }
-
-    });
-</script>
 
 
 <script src="/assets/js/bootstrap.js"></script>

@@ -20,7 +20,7 @@
         <intercept-url pattern="/approvals" access="hasRole('ROLE_HR')"/>
         <intercept-url pattern="/editlist" access="hasAnyRole('ROLE_REGISTER')"/>
 
-        <intercept-url pattern="/factoryoverview" access="hasAnyRole('ROLE_LINDA','ROLE_MANAGER')"></intercept-url>
+        <intercept-url pattern="/factoryoverview" access="hasAnyRole('ROLE_LINDA','ROLE_MANAGER','ROLE_REGISTER')"></intercept-url>
 
 
         <form-login login-page="/login" authentication-failure-url="/login?error" authentication-success-handler-ref="successHandler"/>

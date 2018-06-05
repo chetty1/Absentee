@@ -101,7 +101,7 @@
             </button>
             <c:if test="${not empty pageContext.request.userPrincipal}">
 
-                <a class="navbar-brand" style="color:white;" href="/approvals"><sec:authentication
+                <a class="navbar-brand" style="color:white;" href="/register"><sec:authentication
                         property="principal.username"/></a>
             </c:if>
         </div>
@@ -109,15 +109,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
-                <li>
-                    <a style="color: white" href="/register">Register</a>
-                </li>
-                <li>
-                    <a style="color: white" href="/editlist">Edit List</a>
-                </li>
-                <li>
-                    <a style="color: white" href="/logout">Logout</a>
-                </li>
+
+                <li> <a style="color: white" href="/register">Register</a> </li>
+                <li> <a style="color: white" href="/editlist">Edit List</a> </li>
+                <li> <a style="color: white" href="/logout">Logout</a> </li>
 
             </ul>
         </div>
@@ -133,7 +128,7 @@
     <div class="row">
 
         <section>
-            <h1 class="entry-title"><span>Edit Clock In</span></h1>
+            <h1 class="entry-title"><span>Clock In</span></h1>
             <hr>
             <form class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data">
                 <div class="form-group">
@@ -146,12 +141,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Clock In Range</label>
+                    <label class="control-label col-sm-3">Hours Worked</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="beforeTime" value="00:00" name="beforeTime" class="form-control ">
-                            <div class="input-group-addon">To</div>
-                            <input type="text" id="afterTime" value="00:00" name="afterTime" class="form-control">
+                            <input type="text" id="beforeTime" value="${hrsworked}" name="beforeTime" class="form-control ">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Hours Late</label>
+                    <div class="col-md-4 col-sm-9">
+                        <div class="input-group input-timerange">
+                            <input type="text" id="hourslate" name="beforeTime" value="${hrslate}"
+                                   class="form-control ">
+
                         </div>
                     </div>
 
@@ -161,67 +166,76 @@
                     <label class="control-label col-sm-3">On Site(Local)</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="beforeOnsite" name="beforeTime" value="00:00" class="form-control ">
-                            <div class="input-group-addon">To</div>
-                            <input type="text" id="afterOnsite" name="afterTime" value="00:00" class="form-control">
+                            <input type="text" id="beforeOnsite" name="beforeTime" value="${onsitelocal}" class="form-control ">
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">On Site(Away)</label>
+                    <div class="col-md-4 col-sm-9">
+                        <div class="input-group input-timerange">
+                            <input type="text" id="beforeawaySite" name="beforeTime" value="${onsiteaway}"
+                                   class="form-control ">
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Time and a Half</label>
+                    <div class="col-md-4 col-sm-9">
+                        <div class="input-group input-timerange">
+                            <input type="text" id="timeandahalf" name="beforeTime" value="${timeandahalf}"
+                                   class="form-control ">
+
                         </div>
                     </div>
 
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">On Site(Away)</label>
+                    <label class="control-label col-sm-3">Double Pay</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="beforeawaySite" name="beforeTime" value="00:00"
+                            <input type="text" id="doublepay" name="beforeTime" value="${doublepay}"
                                    class="form-control ">
-                            <div class="input-group-addon">To</div>
-                            <input type="text" id="afterawaySite" name="afterTime" value="00:00" class="form-control">
+
                         </div>
                     </div>
 
                 </div>
+
+
+
+
 
 
                 <div class="form-group">
                     <label class="control-label col-sm-3">Date</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-daterange">
-                            <input type="text" id="date" name="beforeTime" value="${date}" class="form-control ">
+                            <input type="text" id="date" name="beforeTime" class="form-control" value="${date}">
 
                         </div>
                     </div>
 
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-sm-3">Overtime Type</label>
-                    <div class="col-md-8 col-sm-8">
-                        <div class="input-group" style="padding-top: 8px">
-                            <label  id="radio2" class="form-check-label">
-                                <input type="radio" class="form-check-input"  name="radio"
-                                       id="Time and a Half" value="option1">
-                                Time and a Half
-                            </label>
 
-                            <label id= "radio1" class="form-check-label">
-                                <input type="radio" class="form-check-input" name="radio"
-                                       id="Double Pay" value="option1">
-                                Double Pay
-                            </label>
-
-                            <input type="hidden" id="overtimeType" name="time" value="">
-                        </div>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-3">Absent</label>
                     <div class="col-md-8 col-sm-8">
                         <div class="input-group" style="padding-top: 8px">
                             <label class="form-check-label">
-                                <input ${checked} type="checkbox"  class="checkbox-inline" name="absent"
-                                       id="Absent"  value="">
+                                <input type="checkbox" class="checkbox-inline" name="absent"
+                                       id="Absent" value="option1"${absent}>
 
                             </label>
 
@@ -231,11 +245,11 @@
                 </div>
 
 
+
+
                 <div class="form-group">
                     <div class="col-xs-offset-3 col-xs-10">
                         <input type="button" value="Save" onclick="onSave()" class="btn btn-primary">
-                       <a href="/editlist"> <input type="button" value="Back"  class="btn btn-primary"></a>
-
                     </div>
                 </div>
 
@@ -255,7 +269,30 @@
 <script src="<spring:url value="/assets/jquery.timepicker.js"/>"></script>
 <script src="<spring:url value="/assets/jquery.autocomplete.min.js"/>"></script>
 
+<script>
+    $(document).ready(function () {
 
+        $('#name').autocomplete({
+            serviceUrl: '/getName',
+            paramName: "Name",
+            delimiter: ",",
+            transformResult: function (response) {
+
+                return {
+                    //must convert json to javascript object before process
+                    suggestions: $.map(JSON.parse(response), function (item) {
+                        return {value: item.name, data: item.id};
+                    })
+
+                };
+
+            }
+
+
+        });
+
+    });
+</script>
 
 <script type="text/javascript">
     $('.input-daterange input').each(function () {
@@ -284,33 +321,28 @@
             data: {
                 name: document.getElementById("name").value,
                 beforeTime: document.getElementById("beforeTime").value,
-                afterTime: document.getElementById("afterTime").value,
                 onsiteLocalbefore: document.getElementById("beforeOnsite").value,
-                onsiteafter: document.getElementById("afterOnsite").value,
                 onsiteawaybefore: document.getElementById("beforeawaySite").value,
-                onsiteawayAfter: document.getElementById("afterawaySite").value,
+                timeandahalf:document.getElementById("timeandahalf").value,
+                doublepay:document.getElementById("doublepay").value,
                 date: document.getElementById("date").value,
-                overtimeType: document.getElementById("overtimeType").value,
-                absent: document.getElementById("Absent").checked
-
+                absent: document.getElementById("Absent").checked,
+                hourslate:document.getElementById("hourslate").value
             },
 
             success: function (response) {
                 alert("User Successfully Added");
                 document.getElementById("name").value = "",
                         document.getElementById("beforeTime").value = "00:00",
-                        document.getElementById("afterTime").value = "00:00",
                         document.getElementById("beforeOnsite").value = "00:00",
-                        document.getElementById("afterOnsite").value = "00:00",
                         document.getElementById("beforeawaySite").value = "00:00",
-                        document.getElementById("afterawaySite").value = "00:00",
-                        document.getElementById("overtimeType").value = "",
                         document.getElementById("Absent").checked = false,
-                        document.getElementById("Time and a Half").checked = false,
                         document.getElementById("date").value = "",
+                        document.getElementById("timeandahalf").value="00:00",
+                        document.getElementById("doublepay").value= "00:00",
+                        document.getElementById("hourslate").value="00:00",
+                window.location="/editlist"
 
-                        document.getElementById("Double Pay").checked = false,
-window.location="/editlist";
 
             },
             error: function (jqXHR, exception) {
@@ -320,52 +352,7 @@ window.location="/editlist";
 
     }
 </script>
-<script>
-    $('#radio1').click(function(e) {
-        e.preventDefault();
 
-        var radio = $(this).find('input[type=radio]');
-
-        if (radio.is(':checked')) {
-            radio.prop('checked', false);
-            document.getElementById("overtimeType").value = "";
-
-
-        } else {
-            radio.prop('checked', true);
-            document.getElementById("overtimeType").value = "Double Pay";
-
-        }
-
-    });
-
-    $('#radio2').click(function(e) {
-        e.preventDefault();
-
-        var radio = $(this).find('input[type=radio]');
-
-        if (radio.is(':checked')) {
-            radio.prop('checked', false);
-            document.getElementById("overtimeType").value = "";
-
-        } else {
-            radio.prop('checked', true);
-            document.getElementById("overtimeType").value = "Time and a Half";
-
-        }
-
-    });
-</script>
-
-
-
-
-<script>
-    function yolo(id) {
-        document.getElementById("overtimeType").value = id;
-
-    }
-</script>
 
 
 <script src="/assets/js/bootstrap.js"></script>
