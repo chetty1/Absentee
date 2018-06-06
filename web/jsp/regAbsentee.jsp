@@ -20,7 +20,6 @@
     <link href="<spring:url value="/assets/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<spring:url value="/assets/font-awesome/css/font-awesome.css"/>" rel="stylesheet">
     <link href="<spring:url value="/assets/dist/css/bootstrap-datepicker.css"/>" rel="stylesheet">
-    <link href="<spring:url value="/assets/jquery.timepicker.css"/>" rel="stylesheet">
 
     <style>
 
@@ -142,7 +141,7 @@
                     <label class="control-label col-sm-3">Name</label>
                     <div class="col-md-8 col-sm-9">
                         <div class="input-group">
-                            <input style="width: 250px" class="form-control" name="emailid" value="" id="name">
+                            <input style="width: 250px" class="form-control" type="text" value="" id="name">
                         </div>
                     </div>
                 </div>
@@ -151,7 +150,7 @@
                     <label class="control-label col-sm-3">Hours Worked</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="beforeTime" value="00:00" name="beforeTime" class="form-control ">
+                            <input type="number" id="beforeTime" value="00.00" name="beforeTime" class="form-control ">
                         </div>
                     </div>
 
@@ -161,7 +160,7 @@
                     <label class="control-label col-sm-3">Hours Late</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="hourslate" name="beforeTime" value="00:00"
+                            <input type="number" id="hourslate" name="beforeTime" value="00.00"
                                    class="form-control ">
 
                         </div>
@@ -173,7 +172,7 @@
                     <label class="control-label col-sm-3">On Site(Local)</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="beforeOnsite" name="beforeTime" value="00:00" class="form-control ">
+                            <input type="number" id="beforeOnsite" name="beforeTime" value="00.00" class="form-control ">
 
                         </div>
                     </div>
@@ -185,7 +184,7 @@
                     <label class="control-label col-sm-3">On Site(Away)</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="beforeawaySite" name="beforeTime" value="00:00"
+                            <input type="number" id="beforeawaySite" name="beforeTime" value="00.00"
                                    class="form-control ">
 
                         </div>
@@ -198,7 +197,7 @@
                     <label class="control-label col-sm-3">Time and a Half</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="timeandahalf" name="beforeTime" value="00:00"
+                            <input type="number" id="timeandahalf" name="beforeTime" value="00.00"
                                    class="form-control ">
 
                         </div>
@@ -210,7 +209,7 @@
                     <label class="control-label col-sm-3">Double Pay</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="doublepay" name="beforeTime" value="00:00"
+                            <input type="number" id="doublepay" name="beforeTime" value="00.00"
                                    class="form-control ">
 
                         </div>
@@ -286,7 +285,6 @@
 <script src="<spring:url value="/assets/js/bootstrap.js"/>"></script>
 <script src="<spring:url value="/assets/js/jquery.js"/>"></script>
 <script src="<spring:url value="/assets/dist/js/bootstrap-datepicker.js"/>"></script>
-<script src="<spring:url value="/assets/jquery.timepicker.js"/>"></script>
 <script src="<spring:url value="/assets/jquery.autocomplete.min.js"/>"></script>
 
 <script>
@@ -322,15 +320,7 @@
         });
     })
 </script>
-<script type="text/javascript">
-    $('.input-timerange input').each(function () {
-        $(this).timepicker({
-            'scrollDefault': 'now',
-            'show2400': 'true',
-            'timeFormat': 'G:i'
-        });
-    })
-</script>
+
 <script>
     function onSave() {
 
@@ -354,15 +344,15 @@
             success: function (response) {
                 alert("User Successfully Added");
                 document.getElementById("name").value = "",
-                        document.getElementById("beforeTime").value = "00:00",
-                        document.getElementById("beforeOnsite").value = "00:00",
-                        document.getElementById("beforeawaySite").value = "00:00",
+                        document.getElementById("beforeTime").value = "00.00",
+                        document.getElementById("beforeOnsite").value = "00.00",
+                        document.getElementById("beforeawaySite").value = "00.00",
                         document.getElementById("Absent").checked = false,
                         document.getElementById("date").value = "",
                         document.getElementById("Public Holiday").checked = false,
-                        document.getElementById("timeandahalf").value="00:00",
-                        document.getElementById("doublepay").value= "00:00",
-                document.getElementById("hourslate").value="00:00"
+                        document.getElementById("timeandahalf").value="00.00",
+                        document.getElementById("doublepay").value= "00.00",
+                document.getElementById("hourslate").value="00.00"
 
 
             },

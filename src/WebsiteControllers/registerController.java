@@ -90,20 +90,19 @@ public class registerController {
                 ArrayList<Staff> staffList = new ArrayList<>(repo.findAll());
 
                 for (Staff staff : staffList) {
-if(staff.getHoursWorked()==null){
-    repository.save(new OverView(staff, "00:00", "00:00", "00:00", "00:00", "0", "0", "0", "00:00", "00:00", "0", "0", true, "0", date));
+                    if (staff.getHoursWorked() == null) {
+                        repository.save(new OverView(staff, "00:00", "00:00", "00:00", "00:00", "0", "0", "0", "00:00", "00:00", "0", "0", true, "0", date));
 
-}
-else{
-    repository.save(new OverView(staff, "00:00", "00:00", staff.getHoursWorked(), "00:00", "0", "0", "0", "00:00", "00:00", "0", "0", true, "0", date));
+                    } else {
+                        repository.save(new OverView(staff, "00:00", "00:00", staff.getHoursWorked(), "00:00", "0", "0", "0", "00:00", "00:00", "0", "0", true, "0", date));
 
-}
+                    }
 
 
                 }
                 return new ResponseEntity(HttpStatus.OK);
             } else if (!absentbool && !holidaybool) {
-                repository.save(new OverView(staff1, timeandahalf, doublepay, beforeTime, hourslate, "0", "0", "0", localbefore, awaybefore, "0", "0", true, "0", date));
+                repository.save(new OverView(staff1, convertTime(timeandahalf),convertTime(doublepay), convertTime(beforeTime), convertTime(hourslate), "0", "0", "0", convertTime(localbefore),convertTime(awaybefore), "0", "0", true, "0", date));
 
                 return new ResponseEntity(HttpStatus.OK);
 
@@ -113,7 +112,24 @@ else{
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+
+
+    public String convertTime(String userInput) {
+       double input= Double.parseDouble(userInput);
+
+
+        int hours = (int)input;
+
+
+        double minutestmp = ((input - hours) * 60);
+        int minutes = (int)minutestmp;
+        String formatted = String.format("%02d:%02d", hours,minutes);
+
+       // String time = String.valueOf(hours)+":"+String.valueOf(minutes);
+        return formatted;
+    }
 }
+
   /*  public String addTime(String time1, String time2) {
         PeriodFormatter hoursMinutes = new PeriodFormatterBuilder()
                 .appendHours()

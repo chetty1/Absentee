@@ -55,12 +55,12 @@ ModelAndView view =  new ModelAndView("EditOverview");
         }
 
         view.addObject("name",overView.get().getStaff().getName());
-        view.addObject("hrsworked",oview.getHrsWorked());
-        view.addObject("hrslate",oview.getHrsLate());
-        view.addObject("onsitelocal",oview.getOnSiteLocal());
-        view.addObject("onsiteaway",oview.getOnSiteAway());
-        view.addObject("timeandahalf",oview.getOverTimeHrshalf());
-        view.addObject("doublepay",oview.getOvertimeHrsDouble());
+        view.addObject("hrsworked",convertFromTime(oview.getHrsWorked()));
+        view.addObject("hrslate",convertFromTime(oview.getHrsLate()));
+        view.addObject("onsitelocal",convertFromTime(oview.getOnSiteLocal()));
+        view.addObject("onsiteaway",convertFromTime(oview.getOnSiteAway()));
+        view.addObject("timeandahalf",convertFromTime(oview.getOverTimeHrshalf()));
+        view.addObject("doublepay",convertFromTime(oview.getOvertimeHrsDouble()));
         view.addObject("date", overView.get().getDate());
         return view;
     }
@@ -115,17 +115,17 @@ ModelAndView view =  new ModelAndView("EditOverview");
             }
             else if (!absentbool ) {
 
-                oview.setOverTimeHrshalf(timeandahalf);
-                oview.setOvertimeHrsDouble(doublepay);
-                oview.setHrsWorked(beforeTime);
-                oview.setHrsLate(hourslate);
+                oview.setOverTimeHrshalf(convertTime(timeandahalf));
+                oview.setOvertimeHrsDouble(convertTime(doublepay));
+                oview.setHrsWorked(convertTime(beforeTime));
+                oview.setHrsLate(convertTime(hourslate));
                 oview.setUnpaidLeave("0");
                 oview.setSickLeave("0");
                 oview.setFamRespon("0");
 
 
-                oview.setOnSiteLocal(localbefore);
-                oview.setOnSiteAway(awaybefore);
+                oview.setOnSiteLocal(convertTime(localbefore));
+                oview.setOnSiteAway(convertTime(awaybefore));
                 oview.setApproved(true);
 
 
@@ -145,6 +145,37 @@ ModelAndView view =  new ModelAndView("EditOverview");
 
     }
 
+
+    public String convertFromTime(String time){
+        PeriodFormatter hoursMinutes = new PeriodFormatterBuilder()
+                .appendHours()
+                .appendSeparator(":")
+                .appendMinutes()
+                .toFormatter();
+        Period period1 = Period.parse(time, hoursMinutes);
+
+        period1 =period1.normalizedStandard(PeriodType.time());
+        int hours = period1.getHours();
+        int min = period1.getMinutes();
+
+        return String.valueOf(hours+((double)min/(double) 60));
+
+    }
+
+
+    public String convertTime(String userInput) {
+        double input= Double.parseDouble(userInput);
+
+
+        int hours = (int)input;
+
+
+        double minutestmp = ((input - hours) * 60);
+        int minutes = (int)minutestmp;
+
+        String formatted = String.format("%02d:%02d", hours,minutes);
+        return formatted;
+    }
 
 
 

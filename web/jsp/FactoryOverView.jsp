@@ -103,7 +103,7 @@
                 <sec:authorize access="hasAnyRole('ROLE_REGISTER') and isAuthenticated()">
 
                     <li>
-                        <a style="color: white" href="/register">Factory Statistics</a>
+                        <a style="color: white" href="/register">Register</a>
                     </li>
                 </sec:authorize>
                 <li>

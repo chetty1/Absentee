@@ -20,7 +20,6 @@
     <link href="<spring:url value="/assets/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<spring:url value="/assets/font-awesome/css/font-awesome.css"/>" rel="stylesheet">
     <link href="<spring:url value="/assets/dist/css/bootstrap-datepicker.css"/>" rel="stylesheet">
-    <link href="<spring:url value="/assets/jquery.timepicker.css"/>" rel="stylesheet">
 
     <style>
 
@@ -144,7 +143,7 @@
                     <label class="control-label col-sm-3">Hours Worked</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="beforeTime" value="${hrsworked}" name="beforeTime" class="form-control ">
+                            <input type="number" id="beforeTime" value="${hrsworked}" name="beforeTime" class="form-control ">
                         </div>
                     </div>
 
@@ -154,7 +153,7 @@
                     <label class="control-label col-sm-3">Hours Late</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="hourslate" name="beforeTime" value="${hrslate}"
+                            <input type="number" id="hourslate" name="beforeTime" value="${hrslate}"
                                    class="form-control ">
 
                         </div>
@@ -166,7 +165,7 @@
                     <label class="control-label col-sm-3">On Site(Local)</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="beforeOnsite" name="beforeTime" value="${onsitelocal}" class="form-control ">
+                            <input type="number" id="beforeOnsite" name="beforeTime" value="${onsitelocal}" class="form-control ">
 
                         </div>
                     </div>
@@ -178,7 +177,7 @@
                     <label class="control-label col-sm-3">On Site(Away)</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="beforeawaySite" name="beforeTime" value="${onsiteaway}"
+                            <input type="number" id="beforeawaySite" name="beforeTime" value="${onsiteaway}"
                                    class="form-control ">
 
                         </div>
@@ -191,7 +190,7 @@
                     <label class="control-label col-sm-3">Time and a Half</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="timeandahalf" name="beforeTime" value="${timeandahalf}"
+                            <input type="number" id="timeandahalf" name="beforeTime" value="${timeandahalf}"
                                    class="form-control ">
 
                         </div>
@@ -203,7 +202,7 @@
                     <label class="control-label col-sm-3">Double Pay</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-timerange">
-                            <input type="text" id="doublepay" name="beforeTime" value="${doublepay}"
+                            <input type="number" id="doublepay" name="beforeTime" value="${doublepay}"
                                    class="form-control ">
 
                         </div>
@@ -220,7 +219,7 @@
                     <label class="control-label col-sm-3">Date</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-daterange">
-                            <input type="text" id="date" name="beforeTime" class="form-control" value="${date}">
+                            <input type="number" id="date" name="beforeTime" class="form-control" value="${date}">
 
                         </div>
                     </div>
@@ -266,7 +265,6 @@
 <script src="<spring:url value="/assets/js/bootstrap.js"/>"></script>
 <script src="<spring:url value="/assets/js/jquery.js"/>"></script>
 <script src="<spring:url value="/assets/dist/js/bootstrap-datepicker.js"/>"></script>
-<script src="<spring:url value="/assets/jquery.timepicker.js"/>"></script>
 <script src="<spring:url value="/assets/jquery.autocomplete.min.js"/>"></script>
 
 <script>
@@ -302,15 +300,7 @@
         });
     })
 </script>
-<script type="text/javascript">
-    $('.input-timerange input').each(function () {
-        $(this).timepicker({
-            'scrollDefault': 'now',
-            'show2400': 'true',
-            'timeFormat': 'G:i'
-        });
-    })
-</script>
+
 <script>
     function onSave() {
 
