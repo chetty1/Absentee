@@ -219,7 +219,7 @@
                     <label class="control-label col-sm-3">Date</label>
                     <div class="col-md-4 col-sm-9">
                         <div class="input-group input-daterange">
-                            <input type="number" id="date" name="beforeTime" class="form-control" value="${date}">
+                            <input type="text" id="date" name="beforeTime" class="form-control" value="${date}">
 
                         </div>
                     </div>

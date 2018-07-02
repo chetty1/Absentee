@@ -320,7 +320,7 @@
             <div class="col-md-6">
                 <div class="panel">
                     <div class="panel-heading panel-heading-white text-center">
-                        <h4>Bar Graph Showing Overtime vs Hours Worked vs Hours Late(Sanitation)</h4>
+                        <h4>Bar Graph Showing Overtime vs Hours Worked vs Hours Late(Drawing)</h4>
                     </div>
                     <div class="panel-body">
                         <div id="bar-drawing"></div>

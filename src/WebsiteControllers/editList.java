@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by chett_000 on 2018/04/23.
@@ -51,6 +52,7 @@ public class editList {
 
 
         }
+        Collections.reverse(dateList);
 
         view.addObject("editList",dateList);
 
