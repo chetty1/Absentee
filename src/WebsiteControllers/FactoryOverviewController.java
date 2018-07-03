@@ -127,9 +127,10 @@ public class FactoryOverviewController {
         period1 = period1.normalizedStandard(type);
 
 
-        String date3 = String.valueOf(period1.getHours()) + ":" + String.valueOf(period1.getMinutes());
+       // String date3 = String.valueOf(period1.getHours()) + ":" + String.valueOf(period1.getMinutes());
+        String formatted = String.format("%02d:%02d", period1.getHours(),period1.getMinutes());
 
-        return date3;
+        return formatted;
     }
 
 

@@ -4,11 +4,6 @@ import Model.OverView;
 import Model.Staff;
 import Repositories.overviewRepository;
 import Repositories.staffRepository;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
-import org.joda.time.PeriodType;
-import org.joda.time.format.PeriodFormatter;
-import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by chett_000 on 2017/06/03.
@@ -86,7 +82,7 @@ public class registerController {
 
 
                 return new ResponseEntity(HttpStatus.OK);
-            } else if (holidaybool) {
+            } else if (holidaybool &&  !new SimpleDateFormat("EEEE", Locale.ENGLISH).format( new SimpleDateFormat("dd/MM/yyyy").parse(date)).equals("Friday")) {
                 ArrayList<Staff> staffList = new ArrayList<>(repo.findAll());
 
                 for (Staff staff : staffList) {
@@ -101,8 +97,25 @@ public class registerController {
 
                 }
                 return new ResponseEntity(HttpStatus.OK);
+
+
+            } else if (holidaybool && new SimpleDateFormat("EEEE", Locale.ENGLISH).format( new SimpleDateFormat("dd/MM/yyyy").parse(date)).equals("Friday")) {
+                ArrayList<Staff> staffList = new ArrayList<>(repo.findAll());
+
+                for (Staff staff : staffList) {
+                    if (staff.getHoursWorked() == null) {
+                        repository.save(new OverView(staff, "00:00", "00:00", "00:00", "00:00", "0", "0", "0", "00:00", "00:00", "0", "0", true, "0", date));
+
+                    } else {
+                        repository.save(new OverView(staff, "00:00", "00:00","07:00", "00:00", "0", "0", "0", "00:00", "00:00", "0", "0", true, "0", date));
+
+                    }
+
+
+                }
+                return new ResponseEntity(HttpStatus.OK);
             } else if (!absentbool && !holidaybool) {
-                repository.save(new OverView(staff1, convertTime(timeandahalf),convertTime(doublepay), convertTime(beforeTime), convertTime(hourslate), "0", "0", "0", convertTime(localbefore),convertTime(awaybefore), "0", "0", true, "0", date));
+                repository.save(new OverView(staff1, convertTime(timeandahalf), convertTime(doublepay), convertTime(beforeTime), convertTime(hourslate), "0", "0", "0", convertTime(localbefore), convertTime(awaybefore), "0", "0", true, "0", date));
 
                 return new ResponseEntity(HttpStatus.OK);
 
@@ -115,17 +128,17 @@ public class registerController {
 
 
     public String convertTime(String userInput) {
-       double input= Double.parseDouble(userInput);
+        double input = Double.parseDouble(userInput);
 
 
-        int hours = (int)input;
+        int hours = (int) input;
 
 
         double minutestmp = ((input - hours) * 60);
-        int minutes = (int)minutestmp;
-        String formatted = String.format("%02d:%02d", hours,minutes);
+        int minutes = (int) minutestmp;
+        String formatted = String.format("%02d:%02d", hours, minutes);
 
-       // String time = String.valueOf(hours)+":"+String.valueOf(minutes);
+        // String time = String.valueOf(hours)+":"+String.valueOf(minutes);
         return formatted;
     }
 }
